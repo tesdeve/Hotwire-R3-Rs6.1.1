@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class='newTweet_Title'>New Tweet</h1>
+<div class="newTweet">  
+ <%= render "tweets/form", tweet: @tweet %>
+</div>
+
+<h1 class=tweets-title>Tweets</h1>
+
+  <%= render @tweets %>
+<br>
+
