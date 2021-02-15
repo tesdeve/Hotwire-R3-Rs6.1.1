@@ -6,7 +6,6 @@ class TweetsController < ApplicationController
   def index
     @tweets = Tweet.all
     @tweet = Tweet.new
-
   end
 
   # GET /tweets/1
@@ -30,10 +29,11 @@ class TweetsController < ApplicationController
 
     respond_to do |format|
       if @tweet.save
-        format.html { redirect_to tweets_path }
+        format.html { redirect_to tweets_url, notice: 'Tweet was successfully created!.'  }
         format.json { render :show, status: :created, location: @tweet }
       else
-        format.html { render :new }
+        format.turbo_stream {render turbo_stream: turbo_stream.replace( @tweet, partial: "tweets/form", locals: {tweet: @tweet})}
+        format.html { render :new } #{ redirect_to :new } #, notice: 'Tweet can be created! Add something to the body.' 
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
@@ -71,6 +71,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:body, :likes, :retweets)
+      params.require(:tweet).permit(:body, :likes_count, :retweets_count)
     end
 end
