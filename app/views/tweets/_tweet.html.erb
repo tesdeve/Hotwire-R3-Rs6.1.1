@@ -1,5 +1,6 @@
 <%= turbo_frame_tag dom_id(tweet) do %>
 	<hr>
+	<div class="card">  
 		<div class="border-box">  
 		  <p class="tweet"><%= tweet.body %></p>	
 		  <%= button_to "Likes (#{tweet.likes_count})", tweet_like_path(tweet), method: :post %>
@@ -8,5 +9,6 @@
 		 	<br>
 		  <%= link_to "Edit", edit_tweet_path(tweet) %>
 	  </div>
+	 </div>
 	<hr>
 <% end %>
