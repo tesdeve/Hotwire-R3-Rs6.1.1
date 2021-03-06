@@ -2,11 +2,18 @@
 
 <h1 class='newTweet_Title'>New Tweet</h1>
 <div class="newTweet">  
- <%= render "tweets/form", tweet: @tweet %>
+	<%# Turbo Streams %>
+	<%= turbo_stream_from 'tweets' %>
+
+	<%= turbo_frame_tag 'tweet_form' do %>
+	 <%= render "tweets/form", tweet: @tweet %>
+	<% end %>
 </div>
 
-<h1 class=tweets-title>Tweets</h1>
-
+<h2 class=tweets-title>Tweets</h2>
+<%= turbo_frame_tag 'tweets' do %>
   <%= render @tweets %>
+<% end %>
 <br>
+
 
